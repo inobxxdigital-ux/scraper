@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Intelligence Dashboard</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar glass-panel">
+            <div class="logo-container">
+                <img src="Designguideline/logo.svg" alt="Brand Logo" class="brand-logo">
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-view="latest">
+                    <span class="icon">📈</span> Latest Intelligence
+                </a>
+                <div class="nav-divider">Categories</div>
+                <a href="#" class="nav-item" data-view="Analysis">
+                    <span class="icon">📊</span> Analysis (MBW)
+                </a>
+                <a href="#" class="nav-item" data-view="News">
+                    <span class="icon">📰</span> Industry News
+                </a>
+                <a href="#" class="nav-item" data-view="Community">
+                    <span class="icon">💬</span> Community
+                </a>
+                <div class="nav-divider">Personal</div>
+                <a href="#" class="nav-item" data-view="saved">
+                    <span class="icon">🔖</span> Saved Reports
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="refresh-btn" class="btn primary-btn">Force Refresh</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1 class="page-title">Intelligence Feed</h1>
+                    <p class="subtitle">Latest signals from the last 24 hours.</p>
+                </div>
+            </header>
+
+            <section id="feed-container" class="feed-grid">
+                <!-- Articles will be injected here via app.js -->
+                <div class="loading-state">Initializing intelligence feeds...</div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Use fallback template for articles -->
+    <template id="article-card-template">
+        <article class="article-card glass-panel">
+            <div class="article-image"></div>
+            <div class="article-content">
+                <div class="article-meta">
+                    <span class="source-badge"></span>
+                    <span class="publish-time"></span>
+                </div>
+                <h2 class="article-title"><a href="#" target="_blank"></a></h2>
+                <p class="article-summary"></p>
+                <div class="article-actions">
+                    <button class="save-btn btn outline-btn">Save for later</button>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+Colors
+Primary:
+#0000EE
+Accent:
+#0099FF
+Background:
+#000000
+Text Primary:
+#000000
+Link:
+#0099FF
+Fonts
+Inter Variable(body)
+GT Walsheim Framer Medium(heading)
+Typography
+primary: Inter Variable
+heading: GT Walsheim Framer Medium
+h1: 110px
+h2: 62px
+body: 14px
