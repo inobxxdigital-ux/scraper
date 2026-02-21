@@ -119,9 +119,9 @@ def fetch_hypebot(articles_list):
 
 def fetch_reddit(articles_list):
     print("Fetching live data from Reddit (Artist/Indie/Growth communities)...")
-    # Expanding to include musicmarketing, recordlabels, and generic music production to get a broader scope
-    subreddits = "ArtistDevelopment+Songwriting+WeAreTheMusicMakers+indiemusic+indie+musicmarketing+makinghiphop+EdmProduction+AdvancedProduction"
-    # Fetching top 20 posts of the week to ensure we get the absolute best discussions
+    # Added FreeSounds, Drumkits, and musicproduction for free beats and samples
+    subreddits = "ArtistDevelopment+Songwriting+WeAreTheMusicMakers+musicmarketing+makinghiphop+AdvancedProduction+FreeSounds+Drumkits+musicproduction"
+    # Fetching top 20 posts of the week
     url = f"https://www.reddit.com/r/{subreddits}/top.json?t=week&limit=20"
     
     headers = {
@@ -135,12 +135,30 @@ def fetch_reddit(articles_list):
         
         posts = data.get('data', {}).get('children', [])
         
-        # We'll filter for posts that actually have substance (e.g. text posts or highly upvoted links) 
-        # to ensure they look like 'articles' or 'valuable discussions'
         valid_posts_added = 0
+        
+        # Keywords to filter out self-promotion and unhelpful content
+        exclude_phrases = [
+            "listen to my", "check out my", "my new song", "my latest release", 
+            "my first track", "feedback on my", "what do you think of my", 
+            "my ep", "my album", "stream my", "presave", "my new single",
+            "check my beat", "roast my", "rate my"
+        ]
+        
         for post in posts:
-            if valid_posts_added >= 10: # Cap at 10 reddit posts so it doesn't overwhelm MBW/Hypebot
+            if valid_posts_added >= 10: # Cap at 10 reddit posts
                 break
+                
+            post_data = post.get('data', {})
+            title = post_data.get('title', '')
+            selftext = post_data.get('selftext', '')
+            
+            # Combine title and text to check for unhelpful keywords
+            full_text = (title + " " + selftext).lower()
+            
+            is_unhelpful = any(phrase in full_text for phrase in exclude_phrases)
+            if is_unhelpful:
+                continue # Skip self promo / unhelpful posts
                 
             post_data = post.get('data', {})
             title = post_data.get('title', '')
