@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav-item');
     const pageTitle = document.querySelector('.page-title');
     const titleSubtitle = document.querySelector('.subtitle');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
 
     // Initialize
     init();
@@ -210,5 +212,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 refreshBtn.style.opacity = '1';
             }, 500);
         });
+
+        // Toggle Sidebar
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.toggle('open');
+                } else {
+                    sidebar.classList.toggle('collapsed');
+                }
+            });
+
+            // Close sidebar on mobile when a nav item is clicked
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+        }
     }
 });
