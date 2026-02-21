@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav-item');
     const pageTitle = document.querySelector('.page-title');
     const titleSubtitle = document.querySelector('.subtitle');
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
 
     // Initialize
     init();
@@ -81,7 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // If current view is a category match, filter the master list
         if (currentView !== 'latest' && currentView !== 'saved') {
-            displayList = articles.filter(a => a.category === currentView);
+            if (currentView === 'MBW') {
+                displayList = articles.filter(a => a.source === 'Music Business Worldwide');
+            } else if (currentView === 'Hypebot') {
+                displayList = articles.filter(a => a.source === 'Hypebot');
+            } else if (currentView === 'Reddit') {
+                displayList = articles.filter(a => a.source.includes('Reddit'));
+            } else {
+                displayList = articles.filter(a => a.category === currentView);
+            }
         }
 
         if (displayList.length === 0) {
@@ -183,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 navItems.forEach(nav => nav.classList.remove('active'));
                 item.classList.add('active');
 
-                // Update View State (e.g., 'latest', 'saved', 'Analysis', 'News', 'Community')
+                // Update View State (e.g., 'latest', 'saved', 'MBW', 'Hypebot', 'Reddit')
                 currentView = item.dataset.view;
 
                 // Update Headers
@@ -212,25 +218,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 refreshBtn.style.opacity = '1';
             }, 500);
         });
-
-        // Toggle Sidebar
-        if (menuToggle && sidebar) {
-            menuToggle.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.toggle('open');
-                } else {
-                    sidebar.classList.toggle('collapsed');
-                }
-            });
-
-            // Close sidebar on mobile when a nav item is clicked
-            navItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('open');
-                    }
-                });
-            });
-        }
     }
 });

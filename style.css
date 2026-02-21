@@ -72,38 +72,6 @@ h2 {
     flex-direction: column;
     border-right: 1px solid var(--glass-border);
     background: linear-gradient(180deg, rgba(0, 0, 238, 0.05) 0%, transparent 100%);
-    transition: width 0.3s ease, padding 0.3s ease, transform 0.3s ease;
-    z-index: 100;
-}
-
-/* Collapsed state for Desktop */
-.sidebar.collapsed {
-    width: 80px;
-    padding: 2rem 1rem;
-}
-
-.sidebar.collapsed .logo-container {
-    opacity: 0;
-    pointer-events: none;
-    height: 40px;
-    margin-bottom: 2rem;
-}
-
-.sidebar.collapsed .nav-item {
-    justify-content: center;
-    padding: 1rem 0;
-    width: 100%;
-}
-
-.sidebar.collapsed .nav-item .icon {
-    margin-right: 0 !important;
-}
-
-/* Hide text when collapsed */
-.sidebar.collapsed .nav-item span:not(.icon),
-.sidebar.collapsed .nav-divider,
-.sidebar.collapsed .btn {
-    display: none;
 }
 
 .logo-container {
@@ -165,35 +133,6 @@ h2 {
 
 .top-header {
     margin-bottom: 3rem;
-    display: flex;
-    align-items: center;
-}
-
-.header-left {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-}
-
-.icon-btn {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--color-text-primary);
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    margin-top: 5px;
-}
-
-.icon-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .page-title {
@@ -379,28 +318,14 @@ h2 {
     }
 
     .sidebar {
-        position: fixed;
-        left: -280px;
-        top: 0;
-        bottom: 0;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(20px);
-        width: 280px;
-    }
-
-    .sidebar.open {
-        left: 0;
-        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1.5rem;
     }
 
     .main-content {
         padding: 1.5rem;
-        width: 100%;
-    }
-
-    .header-left {
-        justify-content: flex-start;
     }
 
     .page-title {
