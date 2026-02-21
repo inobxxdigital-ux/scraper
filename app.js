@@ -98,6 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = clone.querySelector('.article-card');
 
             const imageEl = clone.querySelector('.article-image');
+
+            // Retro-fix Reddit Logos for older database/localStorage records
+            if (article.source && article.source.includes('Reddit')) {
+                article.image_url = 'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png';
+            }
+
             if (article.image_url) {
                 imageEl.style.backgroundImage = `url('${article.image_url}')`;
             }
@@ -111,7 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const titleLink = clone.querySelector('.article-title a');
             titleLink.textContent = article.title;
-            titleLink.href = article.url;
+
+            // Clean up potentially broken relative URLs from older database records or localStorage
+            let safeUrl = article.url;
+            if (safeUrl && safeUrl.startsWith('/') && article.source === 'Hypebot') {
+                safeUrl = 'https://www.hypebot.com' + safeUrl;
+            }
+            titleLink.href = safeUrl;
 
             clone.querySelector('.article-summary').textContent = article.summary;
 
